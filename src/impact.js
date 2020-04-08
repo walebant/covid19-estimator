@@ -4,8 +4,17 @@ const impact = (data) => {
   //   challenge 1
   const currentlyInfected = data.reportedCases * 10;
 
-  const estimatedNumberOfInfected = 2 ** Math.round(data.timeToElapse / 3);
-  const infectionsByRequestedTime = currentlyInfected * estimatedNumberOfInfected;
+  //   calculate estimated number of infected based on period type
+  const getEstimatedNumberOfInfected = () => {
+    if (data.periodType === 'weeks') {
+      return 2 ** Math.round((data.timeToElapse * 7) / 3);
+    } if (data.periodType === 'months') {
+      return 2 ** Math.round((data.timeToElapse * 30) / 3);
+    }
+    return 2 ** Math.round(data.timeToElapse / 3);
+  };
+
+  const infectionsByRequestedTime = currentlyInfected * getEstimatedNumberOfInfected();
   //   challenge 2
   const severeCasesByRequestedTime = Math.round(
     (15 / 100) * infectionsByRequestedTime
