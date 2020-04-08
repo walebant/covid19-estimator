@@ -16,16 +16,12 @@ const impact = (data) => {
 
   const infectionsByRequestedTime = currentlyInfected * getEstimatedNumberOfInfected();
   //   challenge 2
-  const severeCasesByRequestedTime = Math.round(
-    (15 / 100) * infectionsByRequestedTime
-  );
+  const severeCasesByRequestedTime = Math.round((15 / 100) * infectionsByRequestedTime);
   const hospitalBedsByRequestedTime = Math.round(
     data.totalHospitalBeds - (35 / 100) * severeCasesByRequestedTime
   );
   //   challenge 3
-  const casesForICUByRequestedTime = Math.round(
-    (5 / 100) * infectionsByRequestedTime
-  );
+  const casesForICUByRequestedTime = Math.round((5 / 100) * infectionsByRequestedTime);
   const casesForVentilatorsByRequestedTime = Math.round(
     (2 / 100) * infectionsByRequestedTime
   );
