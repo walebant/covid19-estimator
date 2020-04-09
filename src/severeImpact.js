@@ -8,7 +8,7 @@ const severeImpact = (data) => {
   //   challenge 2
   const severeCasesByRequestedTime = Math.trunc((15 / 100) * infectionsByRequestedTime);
   const hospitalBedsByRequestedTime = Math.trunc(
-    data.totalHospitalBeds - ((35 / 100) * severeCasesByRequestedTime)
+    ((35 / 100) * data.totalHospitalBeds) - severeCasesByRequestedTime
   );
 
   //   challenge 3
