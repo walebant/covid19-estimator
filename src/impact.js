@@ -6,21 +6,21 @@ const impact = (data) => {
   const infectionsByRequestedTime = currentlyInfected * getEstimatedNumberOfInfected(data);
 
   //   challenge 2
-  const severeCasesByRequestedTime = Math.trunc((15 / 100) * infectionsByRequestedTime);
+  const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const hospitalBedsByRequestedTime = Math.trunc(
-    ((35 / 100) * data.totalHospitalBeds) - severeCasesByRequestedTime
+    (0.35 * data.totalHospitalBeds) - severeCasesByRequestedTime
   );
 
   //   challenge 3
-  const casesForICUByRequestedTime = Math.trunc((5 / 100) * infectionsByRequestedTime);
-  const casesForVentilatorsByRequestedTime = Math.trunc((2 / 100) * infectionsByRequestedTime);
+  const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
+  const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
 
-  const dollarsInFlight = (
-    infectionsByRequestedTime
+  const dollarsInFlight = parseFloat(
+    (infectionsByRequestedTime
     * data.region.avgDailyIncomePopulation
     * data.region.avgDailyIncomeInUSD
-    * getTimeToElapse(data)
-  ).toFixed(2);
+    * getTimeToElapse(data)).toFixed(2)
+  );
 
   return {
     currentlyInfected,
