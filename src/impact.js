@@ -1,17 +1,18 @@
-import formatCurrency from './helper';
-
 const impact = (data) => {
   //   challenge 1
   const currentlyInfected = data.reportedCases * 10;
 
   //   calculate estimated number of infected based on period type
   const getEstimatedNumberOfInfected = () => {
+    if (data.periodType === 'days') {
+      return 2 ** Math.round(data.timeToElapse / 3);
+    }
     if (data.periodType === 'weeks') {
       return 2 ** Math.round((data.timeToElapse * 7) / 3);
     } if (data.periodType === 'months') {
       return 2 ** Math.round((data.timeToElapse * 30) / 3);
     }
-    return 2 ** Math.round(data.timeToElapse / 3);
+    throw new Error('Invalid period type');
   };
 
   const infectionsByRequestedTime = currentlyInfected * getEstimatedNumberOfInfected();
@@ -25,10 +26,10 @@ const impact = (data) => {
   const casesForVentilatorsByRequestedTime = Math.round(
     (2 / 100) * infectionsByRequestedTime
   );
-  const dollarsInFlight = formatCurrency.format(infectionsByRequestedTime
+  const dollarsInFlight = infectionsByRequestedTime
     * data.region.avgDailyIncomePopulation
     * data.region.avgDailyIncomeInUSD
-    * 30);
+    * 30;
 
   return {
     currentlyInfected,
