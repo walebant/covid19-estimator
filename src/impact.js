@@ -17,8 +17,12 @@ const impact = (data) => {
 
   const { avgDailyIncomePopulation, avgDailyIncomeInUSD } = data.region;
   const dollarsInFlight = parseFloat(
-    ((infectionsByRequestedTime * avgDailyIncomePopulation * avgDailyIncomeInUSD)
-    / getTimeToElapse(data)).toFixed(2)
+    (
+      infectionsByRequestedTime
+      * avgDailyIncomePopulation
+      * avgDailyIncomeInUSD
+      * getTimeToElapse(data)
+    ).toFixed(2)
   );
 
   return {
