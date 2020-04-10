@@ -16,13 +16,13 @@ const severeImpact = (data) => {
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
 
   const { avgDailyIncomePopulation, avgDailyIncomeInUSD } = data.region;
-  const dollarsInFlight = Number(
+  const dollarsInFlight = Math.trunc(
     (
       infectionsByRequestedTime
       * avgDailyIncomePopulation
       * avgDailyIncomeInUSD
-      * getTimeToElapse(data)
-    ).toFixed(2)
+    )
+      / getTimeToElapse(data)
   );
 
 
