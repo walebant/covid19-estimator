@@ -15,12 +15,10 @@ const impact = (data) => {
   const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
 
-  const dollarsInFlight = parseFloat(
-    (infectionsByRequestedTime
+  const dollarsInFlight = (infectionsByRequestedTime
     * data.region.avgDailyIncomePopulation
     * data.region.avgDailyIncomeInUSD
-    * getTimeToElapse(data)).toFixed(2)
-  );
+    * getTimeToElapse(data)).toFixed(2);
 
   return {
     currentlyInfected,
